@@ -44,6 +44,7 @@ const CollaborativeRoom = ({roomId,roomMetadata}:CollaborativeRoomProps) => {
     const handleClickOutside = (e:MouseEvent) => {
       if(containerRef.current && !containerRef.current.contains(e.target as Node)){
         setEditing(false);
+        updateDocument(roomId, documentTitle);
       }
     }
 
@@ -52,7 +53,7 @@ const CollaborativeRoom = ({roomId,roomMetadata}:CollaborativeRoomProps) => {
     return ()=>{
       document.removeEventListener('mousedown',handleClickOutside);
     }
-  },[])
+  },[documentTitle,roomId])
 
   useEffect(()=>{
     if(editing && inputRef.current){
